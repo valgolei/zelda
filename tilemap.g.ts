@@ -2,6 +2,8 @@
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const transparency16 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile1 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -156,7 +158,7 @@ namespace myTiles {
 ....................................2................................................................2................................................
 ....................................2..........................................................2.....2................................................
 ....................................2...........................2.2.........22.......................2................................................
-....................................2............................................2.......22..........2................................................
+.................................................................................2.......22..........2................................................
 `, [myTiles.transparency16,sprites.dungeon.stairNorth,sprites.dungeon.floorLight0,sprites.dungeon.floorLight1,sprites.dungeon.doorLockedEast,sprites.dungeon.doorLockedWest,sprites.castle.tileGrass1,sprites.castle.rock0,sprites.castle.rock1,sprites.builtin.forestTiles0,sprites.dungeon.chestClosed,sprites.castle.tileGrass3,sprites.dungeon.floorLight5,sprites.dungeon.floorMixed,sprites.swamp.swampTile2,sprites.castle.tileDarkGrass2,sprites.castle.tileDarkGrass3], TileScale.Sixteen);
         }
         return null;
@@ -165,6 +167,8 @@ namespace myTiles {
     helpers._registerFactory("tile", function(name: string) {
         switch(helpers.stringTrim(name)) {
             case "transparency16":return transparency16;
+            case "myTile":
+            case "tile1":return tile1;
         }
         return null;
     })

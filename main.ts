@@ -1,27 +1,10 @@
 namespace SpriteKind {
     export const cofre = SpriteKind.create()
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function (sprite, otherSprite) {
-    mySprite = sprites.create(img`
-        . . b b b b b b b b b b b b . . 
-        . b e 4 4 4 4 4 4 4 4 4 4 e b . 
-        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-        b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-        b e e e e e e e e e e e e e e b 
-        b e e e e e e e e e e e e e e b 
-        b b b b b b b d d b b b b b b b 
-        c b b b b b b c c b b b b b b c 
-        c c c c c c b c c b c c c c c c 
-        b e e e e e c b b c e e e e e b 
-        b e e e e e e e e e e e e e e b 
-        b c e e e e e e e e e e e e c b 
-        b b b b b b b b b b b b b b b b 
-        . b b . . . . . . . . . . b b . 
-        `, SpriteKind.cofre)
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+    game.over(true)
 })
-let mySprite: Sprite = null
+let chuchu: Sprite = null
 let link = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -40,8 +23,30 @@ let link = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-controller.moveSprite(link, 100, 100)
+link.setKind(SpriteKind.Player)
+controller.moveSprite(link, 10, 10)
 scene.setBackgroundColor(7)
 tiles.setTilemap(tilemap`niveau1`)
 tiles.placeOnRandomTile(link, sprites.dungeon.stairNorth)
 scene.cameraFollowSprite(link)
+game.onUpdateInterval(500, function () {
+    chuchu = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 3 3 . . . . . . . 
+        . . . . . 3 3 3 3 . . . . . . . 
+        . . . . 3 3 3 3 3 3 . . . . . . 
+        . . . 3 1 9 3 3 9 1 3 . . . . . 
+        . . . 3 3 3 3 3 3 3 3 . . . . . 
+        . . 3 3 3 3 3 3 3 3 3 3 . . . . 
+        . . 3 3 3 3 3 3 3 3 3 3 3 . . . 
+        `, SpriteKind.Enemy)
+    chuchu.setPosition(randint(75, 145), randint(30, 110))
+})
